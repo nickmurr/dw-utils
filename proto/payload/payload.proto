@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package payload;
+
+option go_package = "pkg/pb/payload";
+
+import "google/protobuf/timestamp.proto";
+
+message Payload {
+  string run_id = 1;
+  string message_id = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  bool test = 4;
+  string schedule_type = 5;
+  int64 schedule_id = 6;
+  string job_type = 7;
+  string detail_template_id = 8;
+  string shallow_template_id = 9;
+  string url = 10;
+  string domain = 11;
+  bytes combine = 12;
+  int64 retries = 13;
+  int64 rank = 14;
+  int64 captcha_count = 15;
+  int64 page_count = 16;
+  string date_created = 17;
+  bool reparse = 18;
+  string reparse_run_id = 19;
+  string taxonomy_id = 20;
+  string page_hash = 21;
+  repeated InfiniteScrollConfig infinite_scroll_config = 22;
+  Properties properties = 23 ;
+
+  string id = 24;
+  bytes content = 25;
+  string robot_id = 26;
+  bool error = 27;
+  string error_msg = 28;
+}
+
+message InfiniteScrollConfig {
+  string id = 1;
+  string name = 2;
+  string type = 3;
+  string value_type = 4;
+  string init_value = 5;
+  bool static = 6;
+  int64 increment_by = 7;
+}
+
+message Properties {
+  string run_id = 1;
+  string taxonomy_root = 2;
+  string url = 3;
+  string domain = 4;
+  int64 retry = 5;
+  int64 page_count = 6;
+  string traffic_error = 7;
+  int64 data_transfer_size = 8;
+  int64 data_qa_hit_rate = 9;
+  string data_qa_error = 10;
+  string data_blocking = 11;
+  string date_created = 12;
+  QA qa = 13;
+  string job_type = 14;
+  bool taxonomy_complete = 15;
+  string list_length = 16;
+  bool variant = 17;
+  bool init_taxonomy = 18;
+}
+
+
+
+message QA  {
+  string page_url = 1;
+  Summary summary = 2;
+  repeated Field field = 3;
+}
+
+message Field  {
+  string FieldName = 1;
+  repeated Rule rule = 2;
+}
+
+message Rule  {
+  string RuleName = 1;
+  string Impact = 2;
+  bool Pass = 3;
+}
+
+message Summary  {
+  FillCount   fill_count = 1;
+  float fill_percent = 2;
+  Mandatory   mandatory = 3;
+  RuleSummary rule_summary = 4;
+}
+
+message FillCount {
+  int64 filled = 1;
+  int64 total = 2;
+}
+
+message Mandatory {
+  int64 required = 1;
+  int64 filled = 2;
+}
+
+message RuleSummary{
+  int64 Pass = 1;
+  int64 FailMajor = 2;
+  int64 FailMinor = 3;
+}
