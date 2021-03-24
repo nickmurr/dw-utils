@@ -1,7 +1,8 @@
 syntax = "proto3";
 
 package schedule_history;
-option go_package = "proto;schedule_history";
+
+option go_package = "pkg/pb/schedule_history";
 
 import "google/protobuf/timestamp.proto";
 

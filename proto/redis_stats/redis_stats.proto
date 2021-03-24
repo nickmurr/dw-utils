@@ -1,7 +1,9 @@
 syntax = "proto3";
 
 package redis_stats;
-option go_package = "proto;redis_stats";
+
+option go_package = "pkg/pb/redis_stats";
+
 import "google/protobuf/timestamp.proto";
 
 
