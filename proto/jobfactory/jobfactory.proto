@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package jobfactory;
+
+option go_package = "pkg/pb/jobfactory";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+service JobFactory {
+  // Fetch - запросить внешний CSV-файл со списком продуктов по внешнему адресу.
+  rpc Fetch (FetchRequest) returns (FetchResponse) {
+    option (google.api.http) = {
+      post: "/fetch"
+      body: "*"
+    };
+  }
+
+}
+
+message FetchRequest {
+  // URL CSV-файла
+  int64 ScheduleID = 1;
+  bool Test = 2;
+}
+
+message FetchResponse {
+  bool Success = 1;
+}
+
+//enum SortOrder {
+//    // Сортровка по названию продукта (значение по умолчанию)
+//    SORT_ORDER_BY_NAME = 0;
+//    // Сортировка по цене
+//    SORT_ORDER_BY_PRICE = 1;
+//    // Сортировка по времени обновления
+//    SORT_ORDER_BY_UPDATED_AT = 2;
+//    // Сортировка по количеству обновлений
+//    SORT_ORDER_BY_UPDATES_COUNT = 3;
+//}
+//
+//message ListRequest {
+//    message PagingParams {
+//        // Номер страницы (начиная с 1)
+//        uint32 page = 1;
+//        // Размер страницы (количество продуктов на странице, по умолчанию 20)
+//        uint32 page_size = 2;
+//    }
+//    message SortingParams {
+//        // Порядок сортировки (поле)
+//        SortOrder order_by = 1;
+//        // Сортировка по убыванию
+//        bool desc = 2;
+//    }
+//    // Настройки пагинации
+//    PagingParams paging = 1;
+//    // Настройки сортировки
+//    repeated SortingParams sorting = 2;
+//}
+//
+//message ListResponse {
+//    message Product {
+//        // Название продукта
+//        string name = 1;
+//        // Последняя цена продукта
+//        double price = 2;
+//        // Время последнего обновления цены продукта
+//        google.protobuf.Timestamp updated_at = 3;
+//        // Количество изменений цены продукта
+//        uint64 updates_count = 4;
+//    }
+//    // Страница с продуктами
+//    repeated Product products = 1;
+//    // Общее количество продуктов
+//    uint64 total = 2;
+//    // Запрос для следующей страницы (NULL если текущая страница была последней)
+//    ListRequest next = 3;
+//}
