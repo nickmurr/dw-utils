@@ -32,6 +32,6 @@ message ScheduleResponse {
   repeated Schedule data = 1;
 }
 
-service ScheduleHistoryService {
+service ScheduleService {
   rpc GetSchedules (ScheduleRequest) returns (ScheduleResponse) {};
 }
