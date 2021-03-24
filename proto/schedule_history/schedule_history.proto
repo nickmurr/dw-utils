@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package schedule_history;
+option go_package = "proto;schedule_history";
+
+import "google/protobuf/timestamp.proto";
+
+message TUsed {
+  string _id = 1;
+  string TemplateType = 2;
+}
+
+message ScheduleHistoryRequest {
+  int64 ID = 1;
+  string ScheduleID = 2;
+  string ParentRunID = 3;
+  string RunID = 4;
+  string DateCreated = 5;
+  int64 WebsiteID = 6;
+  repeated TUsed TemplatesUsed = 7;
+  string ScheduleItemType = 8;
+  google.protobuf.Timestamp EventDate = 9;
+  google.protobuf.Timestamp EventStart = 10;
+  google.protobuf.Timestamp EventEnd = 11;
+  string TimeTaken = 12;
+  int64 InputRows = 13;
+  int64 OutputRows = 14;
+  int64 Bandwidth = 15;
+  int64 StorageOutputFile = 16;
+  int64 StorageCache = 17;
+  float FillRate = 18;
+  float QaPass = 19;
+  float QaFailMinor = 20;
+  float QaFailMajor = 21;
+  int64 Status = 22;
+  //  QaStats           NullJson
+}
+
+message ScheduleHistoryResponse {
+  bool success = 1;
+}
+
+message GetScheduleHistoryRequest {
+  string run_id = 1;
+}
+
+message ScheduleID {
+  int64 id = 1;
+}
+
+service ScheduleHistoryService {
+  rpc UpdateScheduleHistory (ScheduleHistoryRequest) returns (ScheduleHistoryResponse) {};
+  rpc GetScheduleID (GetScheduleHistoryRequest) returns (ScheduleID) {};
+}

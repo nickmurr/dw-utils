@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package schedule_stats;
+option go_package = "proto;schedule_stats";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+message GetScheduleStatsRequest {
+  int64 schedule_id = 1;
+}
+
+message ScheduleStats {
+  int64 id = 1;
+  int64 schedule_id = 2;
+  int64 detail_total = 3;
+  int64 detail_cache = 4;
+  int64 detail_output = 5;
+  int64 detail_failed = 6;
+  int64 detail_retry = 7;
+  int64 detail_variant = 8;
+  int64 taxonomy_initialize = 9;
+  int64 taxonomy_completed = 10;
+  int64 shallow_total = 11;
+  int64 shallow_cache = 12;
+  int64 shallow_failed = 13;
+  int64 shallow_retry = 14;
+
+  google.protobuf.Timestamp last_update = 15;
+  google.protobuf.Duration duration = 16;
+}
+
+message ScheduleStatsResponse {
+  int64 id = 1;
+}
+
+
+message EmptyResponse {
+  bool success = 1;
+}
+
+service ScheduleStatsService {
+  rpc Get (GetScheduleStatsRequest) returns (ScheduleStats) {};
+  rpc UpdateScheduleStats (ScheduleStats) returns (ScheduleStats) {};
+  rpc CreateScheduleStats (ScheduleStats) returns (ScheduleStats) {};
+}

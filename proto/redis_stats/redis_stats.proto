@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package redis_stats;
+option go_package = "proto;redis_stats";
+import "google/protobuf/timestamp.proto";
+
+
+message EmptyRequest {}
+
+message KeyRequest {
+  string key = 1;
+}
+
+message KeysResponse {
+  repeated string data = 1;
+}
+
+message RedisMap {
+  map<string, string> data = 1;
+}
+
+message StatsMap {
+  map<string, RedisMap> data = 1;
+}
+
+message HourlyStats {
+  google.protobuf.Timestamp time = 1;
+  string page_hit_success = 2;
+  string page_hit_retry = 3;
+  string page_hit_failed = 4;
+  string traffic_per_hour = 5;
+}
+
+service RedisStats {
+  rpc GetAllTopics (EmptyRequest) returns (KeysResponse) {};
+  rpc GetAllTopicsInfo (EmptyRequest) returns (StatsMap) {};
+  rpc GetOneTopicsInfo (KeyRequest) returns (RedisMap) {};
+
+  rpc GetAllBacklogs (EmptyRequest) returns (KeysResponse) {};
+  rpc GetAllBacklogsInfo (EmptyRequest) returns (StatsMap) {};
+  rpc GetOneBacklogsInfo (KeyRequest) returns (RedisMap) {};
+
+  rpc GetAllTaxonomy (KeyRequest) returns (KeysResponse) {};
+  rpc GetAllTaxonomyInfo (KeyRequest) returns (StatsMap) {};
+  rpc GetOneTaxonomyInfo (KeyRequest) returns (RedisMap) {};
+
+  rpc CreateHourlyStat (HourlyStats) returns (EmptyRequest) {};
+}
