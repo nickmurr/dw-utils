@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package schedule;
+
+option go_package = "pkg/pb/schedule";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/struct.proto";
+
+
+message Schedule {
+  int64 id = 1;
+  string schedule_name = 2;
+  string site_name = 3;
+  string robot_name = 4;
+  string notes = 5;
+  bool active = 6;
+  bool headless = 7;
+  google.protobuf.Timestamp active_range_start = 8;
+  google.protobuf.Timestamp active_range_end = 9;
+  string cron_string = 10;
+  google.protobuf.Timestamp last_run = 11;
+  google.protobuf.Timestamp next_run = 12;
+  string workflow_type = 13;
+  string input_file = 14;
+  string shallow_template_id = 15;
+  string shallow_template_name = 16;
+  string detail_template_id = 17;
+  string detail_template_name = 18;
+  OutputSchemaSlice output_schema = 19;
+  OutputSettings output_settings = 20;
+  int64 customer_id = 21;
+  int64 website_id = 22;
+  bool reuse_cookies = 23;
+}
+
+message OutputSchemaSlice {
+  repeated OutputSchema output_schema = 1;
+}
+
+message OutputSchema {
+  //  string id = 1;
+  string Type = 2;
+  string FieldName = 3;
+  string  FieldValue = 4;
+  string  ExtractedFieldName = 5;
+  //  string  ExtractedFieldID = 6;
+  string  ExtractedFieldType = 7;
+  string  Delimiter = 8;
+  bool  FormatAsJSON = 9;
+  bool  ExcludeNullValues = 10;
+  repeated  CombinedExtractedField CombinedExtractedField = 11;
+}
+
+message CombinedExtractedField {
+  //  string id = 1;
+  string Source = 2;
+  string Name = 3;
+}
+
+message OutputSettings {
+  string delimeter = 1;
+  string field_enclosure = 2;
+  bool include_headers = 3;
+}
