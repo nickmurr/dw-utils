@@ -24,8 +24,7 @@ message Schedule {
   string customer_name = 11;
   int64 website_id = 12;
   string website_name = 13;
-
-
+  int64 index_id = 14;
 }
 
 message ScheduleResponse {

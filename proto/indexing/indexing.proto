@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package payload;
+
+option go_package = "pkg/pb/indexing";
+
+import "google/protobuf/timestamp.proto";
+
+message IndexRequest {
+  int64 index_id = 1;
+}
+message IndexResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+service IndexingService {
+  rpc StartIndexing (IndexRequest) returns (IndexResponse) {};
+}
