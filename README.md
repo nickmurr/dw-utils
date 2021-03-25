@@ -2,9 +2,9 @@
 
 1. To bind your project with this submodule:
 
- ```shell
- git submodule add https://github.com/nickmurr/dw-utils
- ```
+```shell
+git submodule add https://github.com/nickmurr/dw-utils
+```
 
 2. To clone project with submodule:
 
