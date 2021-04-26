@@ -26,4 +26,15 @@ generate-payload:
 		$(CURDIR)/dw-utils/proto/payload/payload.proto
 		-dest=$(CURDIR)/pkg/pb/payload/ \
 		-src=$(CURDIR)/pkg/pb/payload/
+		
+.PHONY: generate-schedule
+generate-schedule:
+	mkdir -p $(CURDIR)/pkg/pb/ && \
+	protoc \
+		--plugin=protoc-gen-gofast=$(CURDIR)/bin/protoc-gen-gofast \
+		-I$(CURDIR)/dw-utils/proto \
+		--gofast_out=$(PROTOM),plugins=grpc:. \
+		$(CURDIR)/dw-utils/proto/payload/schedule.proto
+		-dest=$(CURDIR)/pkg/pb/schedule/ \
+		-src=$(CURDIR)/pkg/pb/schedule/
 ```
