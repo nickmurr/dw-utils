@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package slackintegration;
+
+import "google/protobuf/timestamp.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+
+option go_package = "pkg/pb/slackintegration";
+
+// Enable custom Marshal method.
+option (gogoproto.marshaler_all) = true;
+// Enable custom Unmarshal method.
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+service integration_service {
+  rpc post(request) returns (response) {}
+}
+
+enum receiver {
+  indexing = 0;
+  schedule = 1;
+}
+
+message attachment {
+  bool success = 1;
+
+  string author_name = 2;
+  string author_sub_name = 3;
+  string author_link = 4;
+  string author_icon = 5;
+
+  string title = 6;
+  string title_link = 7;
+  string pretext = 8;
+  string text = 9;
+  string image_url = 10;
+
+  string footer = 11;
+
+  message field {
+    string title = 1;
+    string value = 2;
+    bool short = 3;
+  }
+
+  repeated field fields = 12;
+  repeated string users = 13;
+
+  google.protobuf.Timestamp created_since = 14 [
+    (gogoproto.stdtime) = true
+  ];
+}
+
+message request {
+  receiver receiver = 1;
+  attachment attachment = 2;
+}
+
+message response {
+  bool success = 1;
+}

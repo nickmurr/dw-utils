@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package payload;
+package indexing;
 
 option go_package = "pkg/pb/indexing";
 
