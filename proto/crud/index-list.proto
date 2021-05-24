@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package index_list;
+option go_package = "pkg/pb/index_list";
+
+message Request {
+  int64 indexing_id = 1;
+}
+
+message Response {
+  message IndexList {
+    string url = 1;
+    int64 calculated_item_count = 2;
+    int64 expected_count = 3;
+  }
+  repeated IndexList data = 1;
+}
+
+service Service {
+  rpc GetIndexList (Request) returns (Response) {};
+}
