@@ -37,7 +37,7 @@ message ScheduleHistoryRequest {
   //  QaStats           NullJson
 
   int64 time_expected = 23;
-  string transfer_size = 24;
+  int64 transfer_size = 24;
   int64 total_output = 25;
   int64 pulsar_message_count = 26;
   int64 postgres_rows_count = 27;
