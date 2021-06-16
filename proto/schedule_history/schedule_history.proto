@@ -35,6 +35,28 @@ message ScheduleHistoryRequest {
   float QaFailMajor = 21;
   int64 Status = 22;
   //  QaStats           NullJson
+
+  int64 time_expected = 23;
+  string transfer_size = 24;
+  int64 total_output = 25;
+  int64 pulsar_message_count = 26;
+  int64 postgres_rows_count = 27;
+  int64 parquet_rows_count = 28;
+  int64 csv_line_output_count = 29;
+  int64 redis_item_count = 30;
+  int64 worker_cluster_count = 31;
+  int64 hit_rate = 32;
+  int64 error_count = 33;
+  int64 index_page_found = 34;
+  int64 index_page_scraped = 35;
+  int64 detail_variant_page_found = 36;
+  int64 total_2xx = 37;
+  int64 total_4xx = 38;
+  int64 total_5xx = 39;
+  int64 total_timeout = 40;
+  int64 total_proxy_fail = 41;
+  int64 total_captcha_blocking = 42;
+  int64 total_non_captcha_blocking = 43;
 }
 
 message ScheduleHistoryResponse {
@@ -52,4 +74,5 @@ message ScheduleID {
 service ScheduleHistoryService {
   rpc UpdateScheduleHistory (ScheduleHistoryRequest) returns (ScheduleHistoryResponse) {};
   rpc GetScheduleID (GetScheduleHistoryRequest) returns (ScheduleID) {};
+  rpc GetHistoryByScheduleID (ScheduleID) returns (ScheduleHistoryRequest) {};
 }

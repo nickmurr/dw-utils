@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package template;
+option go_package = "pkg/pb/template";
+
+message Request {
+  string id = 1;
+}
+
+enum TemplateType {
+  Detail = 0;
+  Shallow = 1;
+  Deep = 2;
+}
+
+message Template {
+  string id = 1;
+  string name = 2;
+  TemplateType type = 3;
+  string url = 4;
+  string country_code =5;
+  string proxy_country = 6;
+  string host = 7;
+  // PaginationConfig pagination_config = 2;
+}
+
+message PaginationConfig {
+
+}
+
+message Wrapper {
+string type = 1;
+string value =2;
+message SecondaryMethod {
+  int64 id =1;
+  string value = 2;
+}
+
+map<int64, SecondaryMethod> secondary_methods= 3;
+
+}
+
+message Field {
+  string name = 1;
+  string output = 2;
+  bool detail_url = 3;
+  bool use_wrapper = 4;
+  Variant variant = 5;
+  repeated Extraction extraction = 6;
+}
+
+message Variant {
+  // active means should we use variants or not
+  bool active = 1;
+
+  // create_new creates new record in output file
+  bool create_new = 2;
+  repeated Extraction variants = 3;
+}
+
+message Extraction {
+  string name = 1;
+  string type = 2;
+  string field_value =3;
+  repeated Action actions = 4;
+  bool no_selector =5;
+  bool use_html_context =6;
+}
+
+message Action {
+  string name = 1;
+  string type = 2;
+  string value = 3;
+  string custom_attribute = 4;
+  string custom_attribute_value = 5;
+  string custom_tag = 6;
+  string if_input = 7;
+  string if_input_value = 8;
+  string then_input = 9;
+  string then_input_value = 10;
+  string else_input = 11;
+  string else_input_value = 12;
+  string find_value = 13;
+  string substring_index_start = 14;
+  string substring_index_start_length = 15;
+  string content_type = 16;
+  PostKeys post_keys = 17;
+  string decode_method = 18;
+  string decode_type = 19;
+  string selector_type = 20;
+}
+
+message PostKeys {
+  string key = 1;
+  string value = 2;
+  string type = 3;
+}
+
+service Service {
+  rpc GetTemplate (Request) returns (Template) {};
+}
