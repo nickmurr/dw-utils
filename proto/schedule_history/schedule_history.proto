@@ -57,6 +57,8 @@ message ScheduleHistoryRequest {
   int64 total_proxy_fail = 41;
   int64 total_captcha_blocking = 42;
   int64 total_non_captcha_blocking = 43;
+  int64 detail_expected = 44;
+  int64 detail_prev_count = 45;
 }
 
 message ScheduleHistoryResponse {
