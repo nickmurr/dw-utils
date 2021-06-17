@@ -13,7 +13,7 @@ message TUsed {
 
 message ScheduleHistoryRequest {
   int64 ID = 1;
-  string ScheduleID = 2;
+  int64 ScheduleID = 2;
   string ParentRunID = 3;
   string RunID = 4;
   string DateCreated = 5;
@@ -74,5 +74,5 @@ message ScheduleID {
 service ScheduleHistoryService {
   rpc UpdateScheduleHistory (ScheduleHistoryRequest) returns (ScheduleHistoryResponse) {};
   rpc GetScheduleID (GetScheduleHistoryRequest) returns (ScheduleID) {};
-  rpc GetHistoryByScheduleID (ScheduleID) returns (ScheduleHistoryRequest) {};
+  rpc GetLastHistory (ScheduleID) returns (ScheduleHistoryRequest) {};
 }
