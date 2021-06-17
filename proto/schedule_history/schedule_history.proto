@@ -59,6 +59,7 @@ message ScheduleHistoryRequest {
   int64 total_non_captcha_blocking = 43;
   int64 detail_expected = 44;
   int64 detail_prev_count = 45;
+  int64 customer_id = 46;
 }
 
 message ScheduleHistoryResponse {
