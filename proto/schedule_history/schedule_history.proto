@@ -77,4 +77,5 @@ service ScheduleHistoryService {
   rpc UpdateScheduleHistory (ScheduleHistoryRequest) returns (ScheduleHistoryResponse) {};
   rpc GetScheduleID (GetScheduleHistoryRequest) returns (ScheduleID) {};
   rpc GetLastHistory (ScheduleID) returns (ScheduleHistoryRequest) {};
+  rpc Create (ScheduleHistoryRequest) returns (ScheduleID) {};
 }
