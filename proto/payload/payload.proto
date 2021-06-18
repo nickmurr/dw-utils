@@ -67,6 +67,10 @@ message Properties {
   string list_length = 16;
   bool variant = 17;
   bool init_taxonomy = 18;
+
+  int64 http_status_code = 19;
+  bool err_timeout = 20;
+  bool err_proxy = 21;
 }
 
 
