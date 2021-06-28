@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package file_index;
+option go_package = "pkg/pb/file_index";
+
+message Request {
+  message TaxonomyData {
+    string url = 1;
+    int64 expected_results = 2;
+    int64 calculated_item_count = 3;
+    int64 default_page_count = 4;
+    int64 max_page_range = 5;
+    int64 page_batch_min = 6;
+    int64 page_batch_max = 7;
+    string sort_order_key = 8;
+    string sort_order_value = 9;
+  }
+
+  repeated TaxonomyData crawledTaxonomies = 1;
+  int64 index_id = 2;
+}
+
+message Response {
+  string data = 1;
+}
+
+service Service {
+  rpc UploadIndexing (Request) returns (Response) {};
+}
